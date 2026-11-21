@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pepino DS AI-first · David Santiago Gil</title>
+  <meta name="description" content="How we took Flypass's Pepino design system AI-first: components, tokens and a contract AI agents can read.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="container nav__inner"><a class="nav__brand" href="../">DavGil<span>.design</span></a><div class="nav__right"><ul class="nav__links"><li><a href="../#casos">Work</a></li><li><a href="../#experiencia">Experience</a></li><li><a href="../#contacto">Contact</a></li></ul><div class="lang-switch" role="group" aria-label="Language"><a href="../../casos/pepino-ai-first.html" hreflang="es" lang="es">ES</a><span aria-current="true">EN</span></div></div></div></header>
+
+<main id="main">
+  <section class="cs-hero container">
+    <span class="eyebrow">Flypass · Design System · 2025—2026</span>
+    <h1>Pepino, Flypass's design system, now AI agents understand it too</h1>
+    <p>When the team started building screens with Claude Code and Cursor, the design system became the source of truth for machines too. My job: make sure what we design in Figma reaches generated code without losing style, behavior or accessibility.</p>
+    <dl class="cs-meta">
+      <div><dt>Role</dt><dd>UX Designer · DS &amp; AI</dd></div>
+      <div><dt>Team</dt><dd>Design + front-end engineering</dd></div>
+      <div><dt>Tools</dt><dd>Figma, Claude Code, MCP, Storybook</dd></div>
+      <div><dt>Status</dt><dd>In production, expanding</dd></div>
+    </dl>
+  </section>
+
+  <figure class="container figure-wide"><img src="../../assets/img/pepino/hero-ds.webp" alt="Perspective composition of the Pepino design system: color tokens, typography, spacing, radii and components" width="2400" height="1350"><figcaption>Pepino tokens, variables and components: one source for Figma, code and AI agents.</figcaption></figure>
+  <figure class="container figure-wide"><img src="../../assets/img/pepino/cover.webp" alt="Pepino cover in Figma with vehicle and account cards and a login screen" width="1600" height="800" loading="lazy"><figcaption>Pepino 2.0 in Figma: the library shared by Flypass squads.</figcaption></figure>
+
+  <div class="container cs-body">
+    <section class="cs-block">
+      <h2>The problem</h2>
+      <div class="cs-block__content">
+        <p>Pepino already existed as a web-component library (<code>pp-*</code>) with Angular, React and Vue wrappers, but it had three frictions:</p>
+        <ul>
+          <li><strong>Figma and code drifted apart.</strong> Same component, different names, states or tokens.</li>
+          <li><strong>AI made up UI.</strong> An agent without context generates "similar" buttons with loose hex colors, not real components.</li>
+          <li><strong>The DS was a bottleneck.</strong> Every new screen depended on someone knowing the library by heart.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>What I did</h2>
+      <div class="cs-block__content">
+        <h3>1. Components connected between Figma and engineering</h3>
+        <p>Together with engineering we rebuilt components with AI support, reviewing accessibility, states and visual fidelity against Figma. Each finished component is connected across three layers: <strong>Figma ↔ repository ↔ agent spec</strong>.</p>
+        <figure class="figure-wide"><img src="../../assets/img/pepino/card-variants.webp" alt="pp-card change-payment variants: large and small, with and without alert" loading="lazy" width="1429" height="443"><figcaption>Example: <code>pp-card__change-payment</code> with size and alert variants, documented the same way in Figma and code.</figcaption></figure>
+
+        <h3>2. Design decisions documented in a contract: DESIGN.md</h3>
+        <p>I designed the structure of a <code>DESIGN.md</code> with no duplicated work: live tokens are read from code, and the document covers what code can't infer, such as usage rules, composition patterns and anti-patterns.</p>
+<pre class="code"><span class="c"># DESIGN.md (illustrative excerpt)</span>
+<span class="k">tokens:</span> live source → DS package (not copied here)
+<span class="k">pattern:</span> network error
+  use: pp-alert + "Retry" action
+  type: semantic title S token, body M
+  never: blocking modal for recoverable errors</pre>
+
+        <h3>3. An MCP server so agents find the right thing</h3>
+        <p>With the engineering team, the DS was exposed through MCP. An agent can ask which component to use, its spec, the snippet for its framework, the exact token for a Figma color, or the mapping from a Figma name to its component <code>pp-*</code>.</p>
+        <div class="flow" aria-label="Figma to code flow"><span>Design in Figma</span><i>→</i><span>find_component_for</span><i>→</i><span>get_component_spec</span><i>→</i><span>generate_component_code</span><i>→</i><span>UI on-brand</span></div>
+        <p>Because the MCP reads the installed DS version, updating the library is enough for agents to see new components. There are no two sources of truth to maintain.</p>
+        <p>That way, Pepino's decisions reach other people's workflows whatever AI tool they use: Claude, Lovable or Figma Make.</p>
+
+        <h3>4. pp-ui: on-brand prototypes in minutes</h3>
+        <p>I created a skill called <strong>pp-ui</strong>, which generates demos and prototypes with Pepino's tokens and governance. Product and business validate ideas with realistic UI before asking for high-fidelity design.</p>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>Outcomes</h2>
+      <div class="cs-block__content">
+        <div class="results">
+          <div><b>15</b><span>components integrated across Figma, repo and AI</span></div>
+          <div><b>~56</b><span>components prioritized in the migration backlog</span></div>
+          <div><b>4</b><span>frameworks supported from one source (web components + Angular, React, Vue)</span></div>
+        </div>
+        <p>Also, the first big feature designed on this model was <a href="carga-electrica.html">in-app EV charging</a>.</p>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>What I learned</h2>
+      <div class="cs-block__content">
+        <p>An AI-first design system isn't "documenting more". It's deciding what lives in code, what lives in the document and what the agent needs to understand. The best quality signal is generated code that doesn't need a designer to fix it.</p>
+      </div>
+    </section>
+
+    <nav class="next" aria-label="Case navigation"><a class="btn btn--ghost" href="../#casos">← All work</a><a class="btn btn--primary" href="carga-electrica.html">Next: EV charging →</a></nav>
+  </div>
+</main>
+<footer class="footer"><div class="container"><span>© 2026 David Santiago Gil Sabogal</span><a href="mailto:davids.gilsbg@gmail.com">davids.gilsbg@gmail.com</a></div></footer>
+<script src="../../assets/js/main.js" defer></script>
+</body>
+</html>

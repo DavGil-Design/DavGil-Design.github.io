@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Carga eléctrica en Flypass · David Santiago Gil</title>
+  <meta name="description" content="Diseño end-to-end del servicio de carga eléctrica en la app Flypass: mapa, configuración, carga en vivo, Live Activity y comprobante.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="nav"><div class="container nav__inner"><a class="nav__brand" href="../">DavGil<span>.design</span></a><div class="nav__right"><ul class="nav__links"><li><a href="../#casos">Casos</a></li><li><a href="../#experiencia">Experiencia</a></li><li><a href="../#contacto">Contacto</a></li></ul><div class="lang-switch" role="group" aria-label="Idioma"><span aria-current="true">ES</span><a href="../en/casos/carga-electrica.html" hreflang="en" lang="en">EN</a></div></div></div></header>
+
+<main id="main">
+  <section class="cs-hero container">
+    <span class="eyebrow">Flypass · Fuel &amp; Charge · 2026</span>
+    <h1>Cargar un carro eléctrico, tan simple como pagar un peaje</h1>
+    <p>Flypass ya resolvía peajes, parqueaderos y combustible para conductores en Colombia. El reto era sumar la carga eléctrica: un servicio nuevo, con hardware de terceros, cobros variables y muchas cosas que pueden fallar en el mundo físico.</p>
+    <dl class="cs-meta">
+      <div><dt>Rol</dt><dd>UX Designer end-to-end</dd></div>
+      <div><dt>Plataforma</dt><dd>App iOS / Android</dd></div>
+      <div><dt>Alcance</dt><dd>+100 pantallas y estados</dd></div>
+      <div><dt>Contexto</dt><dd>Programa Fuel &amp; Charge (B2B + B2C)</dd></div>
+    </dl>
+  </section>
+
+  <div class="container screens" role="list" aria-label="Recorrido principal">
+    <figure role="listitem"><img src="../assets/img/ev/home.webp" alt="Home de Flypass con la nueva entrada Carga eléctrica" width="375" height="813" loading="lazy"><figcaption>1. Entrada desde el home</figcaption></figure>
+    <figure role="listitem"><img src="../assets/img/ev/mapa.webp" alt="Mapa de estaciones con filtros rápidos" width="375" height="812" loading="lazy"><figcaption>2. Mapa con filtros</figcaption></figure>
+    <figure role="listitem"><img src="../assets/img/ev/detalle-estacion.webp" alt="Detalle de estación con conectores libres y en uso, y tarifa" width="337" height="1024" loading="lazy"><figcaption>3. Detalle y conector</figcaption></figure>
+    <figure role="listitem"><img src="../assets/img/ev/configurar-carga.webp" alt="Configurar carga: vehículo, límite y medio de pago" width="375" height="832" loading="lazy"><figcaption>4. Configurar la carga</figcaption></figure>
+    <figure role="listitem"><img src="../assets/img/ev/carga-en-vivo.webp" alt="Carga en vivo al 44 % con energía, tiempo y costo estimado" width="375" height="812" loading="lazy"><figcaption>5. Carga en vivo</figcaption></figure>
+    <figure role="listitem"><img src="../assets/img/ev/live-activity.webp" alt="Live Activity en pantalla de bloqueo con progreso y límite" width="375" height="812" loading="lazy"><figcaption>6. Live Activity</figcaption></figure>
+    <figure role="listitem"><img src="../assets/img/ev/comprobante.webp" alt="Comprobante de carga eléctrica con detalle de energía y valor" width="375" height="818" loading="lazy"><figcaption>7. Comprobante</figcaption></figure>
+  </div>
+
+  <div class="container cs-body">
+    <section class="cs-block">
+      <h2>El reto</h2>
+      <div class="cs-block__content">
+        <p>Cargar un carro eléctrico en Colombia todavía genera dudas: ¿la estación funciona?, ¿el conector es compatible?, ¿cuánto voy a pagar?, ¿qué pasa si me voy y la carga sigue? Cada duda es un abandono.</p>
+        <ul>
+          <li><strong>Cobro variable:</strong> se paga por energía (kWh), más parqueo posterior y una tarifa de servicio.</li>
+          <li><strong>Hardware de terceros:</strong> el cargador puede estar ocupado, fallar o no recibir el cable a tiempo.</li>
+          <li><strong>Sesiones largas:</strong> el usuario no se queda mirando la app durante 30 minutos.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>Decisiones clave</h2>
+      <div class="cs-block__content">
+        <h3>Transparencia antes de cobrar</h3>
+        <p>La tarifa se muestra desglosada en el detalle de la estación y otra vez al configurar. El mensaje es explícito: "se cobra al terminar, según lo que consumas; ahora no se cobra nada". El usuario decide con toda la información.</p>
+        <h3>El usuario pone el límite</h3>
+        <p>El usuario puede cargar al 80%, al 100% o poner un límite propio en pesos o en kWh, con validación de rango. Así controla el gasto sin calcular nada.</p>
+        <h3>Seguimiento fuera de la app</h3>
+        <p>Diseñé las Live Activities de iOS para seguir la carga desde la pantalla de bloqueo, con reglas para cada tipo de meta (porcentaje, pesos o kWh) y notificaciones push en cada hito: inicio, avance, cobro y cierre.</p>
+        <h3>Un sistema visual para el mapa</h3>
+        <figure class="figure-wide" style="max-width:340px"><img src="../assets/img/ev/pines.webp" alt="Matriz de pines de electrolinera por estado, potencia y si acepta pago con Flypass" width="348" height="600" loading="lazy"><figcaption>Pines por medio de pago, estado (abierto, cierra pronto, cerrado) y potencia (1 a 4 rayos).</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>Diseñar para cuando falla</h2>
+      <div class="cs-block__content">
+        <p>Una buena parte del trabajo fueron los estados de borde: error de red, cable no conectado a tiempo, cargador ocupado, falla del cargador, sin señal durante la carga, saldo pendiente en cartera y reintento de cobro. Cada uno dice qué pasó, si se cobró algo y cuál es la siguiente acción.</p>
+        <figure class="figure-wide" style="max-width:260px"><img src="../assets/img/ev/error-ocupado.webp" alt="Estado de error: conector ocupado, no se te cobró nada, elegir otro punto" width="375" height="885" loading="lazy"><figcaption>"No se te cobró nada": la frase que más reduce ansiedad en un error de pago.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>Resultados</h2>
+      <div class="cs-block__content">
+        <div class="results">
+          <div><b>+100</b><span>pantallas y estados documentados para desarrollo</span></div>
+          <div><b>3</b><span>pilotos del programa Fuel &amp; Charge (2 de combustible, 1 de electrolineras)</span></div>
+          <div><b>100%</b><span>construido con componentes de Pepino DS</span></div>
+        </div>
+        <p>En el frente B2B del programa también diseñé el portal de gestión de combustible para empresas: estaciones disponibles en lista y mapa, detalle en drawer y comparador de estaciones.</p>
+      </div>
+    </section>
+
+    <nav class="next" aria-label="Navegación entre casos"><a class="btn btn--ghost" href="pepino-ai-first.html">← Pepino DS</a><a class="btn btn--primary" href="sistecredito-pagos.html">Siguiente: Sistecrédito →</a></nav>
+  </div>
+</main>
+<footer class="footer"><div class="container"><span>© 2026 David Santiago Gil Sabogal</span><a href="mailto:davids.gilsbg@gmail.com">davids.gilsbg@gmail.com</a></div></footer>
+<script src="../assets/js/main.js" defer></script>
+</body>
+</html>

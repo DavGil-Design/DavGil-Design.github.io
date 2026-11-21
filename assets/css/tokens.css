@@ -1,0 +1,65 @@
+/* ==========================================================
+   DavGil Design · tokens
+   Primitivos → semánticos → componente.
+   Este portafolio está construido con su propio mini design system.
+   ========================================================== */
+
+:root {
+  /* Primitivos · color */
+  --lime-300: #d4ff5c;
+  --lime-400: #b8fe20;
+  --lime-600: #8fc400;
+  --ink-950: #0e0f0c;
+  --ink-900: #16180f;
+  --ink-800: #22251a;
+  --ink-700: #3a3d33;
+  --ink-500: #6b6e63;
+  --ink-300: #b5b7ad;
+  --ink-100: #ecede6;
+  --paper: #f7f7f2;
+  --white: #ffffff;
+
+  /* Primitivos · espacio (base 4) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* Primitivos · radio */
+  --radius-s: 8px;
+  --radius-m: 16px;
+  --radius-l: 28px;
+  --radius-pill: 999px;
+
+  /* Primitivos · tipografía */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+  --fs-xs: 0.8125rem;
+  --fs-s: 0.9375rem;
+  --fs-m: 1.0625rem;
+  --fs-l: 1.375rem;
+  --fs-xl: 2rem;
+  --fs-2xl: clamp(2.25rem, 4vw, 3.25rem);
+  --fs-3xl: clamp(2.75rem, 7vw, 5.5rem);
+
+  /* Semánticos */
+  --color-bg: var(--paper);
+  --color-surface: var(--white);
+  --color-surface-inverse: var(--ink-950);
+  --color-text: var(--ink-950);
+  --color-text-muted: var(--ink-500);
+  --color-text-inverse: var(--ink-100);
+  --color-border: var(--ink-100);
+  --color-accent: var(--lime-400);
+  --color-accent-strong: var(--lime-600);
+  --color-focus: var(--ink-950);
+
+  --shadow-card: 0 1px 2px rgba(14, 15, 12, 0.04), 0 8px 24px rgba(14, 15, 12, 0.06);
+  --container: 1120px;
+}

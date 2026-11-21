@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pepino DS AI-first · David Santiago Gil</title>
+  <meta name="description" content="Cómo llevamos el sistema de diseño Pepino de Flypass a un modelo AI-first: componentes, tokens y un contrato legible por agentes de IA.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="nav"><div class="container nav__inner"><a class="nav__brand" href="../">DavGil<span>.design</span></a><div class="nav__right"><ul class="nav__links"><li><a href="../#casos">Casos</a></li><li><a href="../#experiencia">Experiencia</a></li><li><a href="../#contacto">Contacto</a></li></ul><div class="lang-switch" role="group" aria-label="Idioma"><span aria-current="true">ES</span><a href="../en/casos/pepino-ai-first.html" hreflang="en" lang="en">EN</a></div></div></div></header>
+
+<main id="main">
+  <section class="cs-hero container">
+    <span class="eyebrow">Flypass · Design System · 2025—2026</span>
+    <h1>Pepino, el design system de Flypass, ahora también lo entienden los agentes de IA</h1>
+    <p>Cuando el equipo empezó a construir pantallas con Claude Code y Cursor, el design system pasó a ser la fuente de verdad también para las máquinas. Mi trabajo: que lo que diseñamos en Figma llegue al código generado sin perder estilo, comportamiento ni accesibilidad.</p>
+    <dl class="cs-meta">
+      <div><dt>Rol</dt><dd>UX Designer · DS &amp; IA</dd></div>
+      <div><dt>Equipo</dt><dd>Diseño + desarrollo front-end</dd></div>
+      <div><dt>Herramientas</dt><dd>Figma, Claude Code, MCP, Storybook</dd></div>
+      <div><dt>Estado</dt><dd>En producción, en expansión</dd></div>
+    </dl>
+  </section>
+
+  <figure class="container figure-wide"><img src="../assets/img/pepino/hero-ds.webp" alt="Composición en perspectiva del sistema de diseño Pepino: tokens de color, tipografía, espaciado, radios y componentes" width="2400" height="1350"><figcaption>Tokens, variables y componentes de Pepino: la misma fuente para Figma, código y agentes de IA.</figcaption></figure>
+  <figure class="container figure-wide"><img src="../assets/img/pepino/cover.webp" alt="Portada de Pepino en Figma con tarjetas de vehículo, cuenta y pantalla de ingreso" width="1600" height="800" loading="lazy"><figcaption>Pepino 2.0 en Figma: la librería que comparten las squads de Flypass.</figcaption></figure>
+
+  <div class="container cs-body">
+    <section class="cs-block">
+      <h2>El problema</h2>
+      <div class="cs-block__content">
+        <p>Pepino ya existía como librería de web components (<code>pp-*</code>) con wrappers para Angular, React y Vue, pero tenía tres fricciones:</p>
+        <ul>
+          <li><strong>Figma y código se desalineaban.</strong> Mismo componente, distintos nombres, estados o tokens.</li>
+          <li><strong>La IA inventaba UI.</strong> Un agente sin contexto genera botones "parecidos" con colores hex sueltos, no componentes reales.</li>
+          <li><strong>El DS era un cuello de botella.</strong> Cada pantalla nueva dependía de que alguien conociera la librería de memoria.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>Qué hice</h2>
+      <div class="cs-block__content">
+        <h3>1. Componentes interconectados entre Figma y desarrollo</h3>
+        <p>Junto con desarrollo reconstruimos componentes con apoyo de IA, revisando accesibilidad, estados y fidelidad visual contra Figma. Cada componente terminado queda conectado en tres capas: <strong>Figma ↔ repositorio ↔ especificación para agentes</strong>.</p>
+        <figure class="figure-wide"><img src="../assets/img/pepino/card-variants.webp" alt="Variantes del componente pp-card change-payment: tamaño grande y pequeño, con y sin alerta" loading="lazy" width="1429" height="443"><figcaption>Ejemplo: <code>pp-card__change-payment</code> con variantes de tamaño y alerta, documentadas igual en Figma y en código.</figcaption></figure>
+
+        <h3>2. Decisiones de diseño documentadas en un contrato: DESIGN.md</h3>
+        <p>Diseñé la estructura de un <code>DESIGN.md</code> sin trabajo duplicado: los tokens vivos se consultan en el código, y el documento cubre lo que el código no puede inferir, como reglas de uso, patrones de composición y anti-patrones.</p>
+<pre class="code"><span class="c"># DESIGN.md (extracto ilustrativo)</span>
+<span class="k">tokens:</span> fuente viva → paquete del DS (no se copian aquí)
+<span class="k">patrón:</span> error de red
+  usar: pp-alert + acción "Reintentar"
+  tipografía: token semántico de título S, cuerpo M
+  nunca: modal bloqueante para errores recuperables</pre>
+
+        <h3>3. Un servidor MCP para que los agentes encuentren lo correcto</h3>
+        <p>Con el equipo de desarrollo, el DS se expuso por MCP. Un agente puede pedir qué componente usar, su especificación, el snippet para su framework, el token exacto de un color de Figma o el mapeo de un nombre de Figma a su componente <code>pp-*</code>.</p>
+        <div class="flow" aria-label="Flujo Figma a código"><span>Diseño en Figma</span><i>→</i><span>find_component_for</span><i>→</i><span>get_component_spec</span><i>→</i><span>generate_component_code</span><i>→</i><span>UI on-brand</span></div>
+        <p>Como el MCP lee la versión instalada del DS, actualizar la librería basta para que los agentes vean los componentes nuevos. No hay que mantener dos fuentes de verdad.</p>
+        <p>Así, las decisiones de Pepino llegan al ciclo de trabajo de otras personas sin importar la herramienta de IA que usen: Claude, Lovable o Figma Make.</p>
+
+        <h3>4. pp-ui: prototipos on-brand en minutos</h3>
+        <p>Creé una skill llamada <strong>pp-ui</strong>, que genera demos y prototipos con los tokens y la gobernanza de Pepino. Producto y negocio validan ideas con UI realista antes de pedir diseño de alta fidelidad.</p>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>Resultados</h2>
+      <div class="cs-block__content">
+        <div class="results">
+          <div><b>15</b><span>componentes integrados entre Figma, repo e IA</span></div>
+          <div><b>~56</b><span>componentes priorizados en backlog de migración</span></div>
+          <div><b>4</b><span>frameworks soportados desde una sola fuente (web components + Angular, React, Vue)</span></div>
+        </div>
+        <p>Además, la primera feature grande diseñada sobre este modelo fue <a href="carga-electrica.html">carga eléctrica en la app</a>.</p>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>Lo que aprendí</h2>
+      <div class="cs-block__content">
+        <p>Un design system AI-first no es "documentar más". Es decidir qué vive en el código, qué vive en el documento y qué tiene que entender el agente. El mejor indicador de calidad es que el código generado no necesite que un diseñador lo corrija.</p>
+      </div>
+    </section>
+
+    <nav class="next" aria-label="Navegación entre casos"><a class="btn btn--ghost" href="../#casos">← Todos los casos</a><a class="btn btn--primary" href="carga-electrica.html">Siguiente: Carga eléctrica →</a></nav>
+  </div>
+</main>
+<footer class="footer"><div class="container"><span>© 2026 David Santiago Gil Sabogal</span><a href="mailto:davids.gilsbg@gmail.com">davids.gilsbg@gmail.com</a></div></footer>
+<script src="../assets/js/main.js" defer></script>
+</body>
+</html>

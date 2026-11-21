@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EV charging at Flypass · David Santiago Gil</title>
+  <meta name="description" content="End-to-end design of the EV charging service in the Flypass app: map, setup, live charging, Live Activity and receipt.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav"><div class="container nav__inner"><a class="nav__brand" href="../">DavGil<span>.design</span></a><div class="nav__right"><ul class="nav__links"><li><a href="../#casos">Work</a></li><li><a href="../#experiencia">Experience</a></li><li><a href="../#contacto">Contact</a></li></ul><div class="lang-switch" role="group" aria-label="Language"><a href="../../casos/carga-electrica.html" hreflang="es" lang="es">ES</a><span aria-current="true">EN</span></div></div></div></header>
+
+<main id="main">
+  <section class="cs-hero container">
+    <span class="eyebrow">Flypass · Fuel &amp; Charge · 2026</span>
+    <h1>Charging an EV, as simple as paying a toll</h1>
+    <p>Flypass already handled tolls, parking and fuel for drivers in Colombia. The challenge was adding EV charging: a new service with third-party hardware, variable pricing and many things that can fail in the physical world.</p>
+    <dl class="cs-meta">
+      <div><dt>Role</dt><dd>UX Designer end-to-end</dd></div>
+      <div><dt>Platform</dt><dd>App iOS / Android</dd></div>
+      <div><dt>Scope</dt><dd>100+ screens and states</dd></div>
+      <div><dt>Context</dt><dd>Fuel &amp; Charge program (B2B + B2C)</dd></div>
+    </dl>
+  </section>
+
+  <div class="container screens" role="list" aria-label="Main flow">
+    <figure role="listitem"><img src="../../assets/img/ev/home.webp" alt="Flypass home with the new EV charging entry" width="375" height="813" loading="lazy"><figcaption>1. Entry from home</figcaption></figure>
+    <figure role="listitem"><img src="../../assets/img/ev/mapa.webp" alt="Station map with quick filters" width="375" height="812" loading="lazy"><figcaption>2. Map with filters</figcaption></figure>
+    <figure role="listitem"><img src="../../assets/img/ev/detalle-estacion.webp" alt="Station detail with free and in-use connectors, and pricing" width="337" height="1024" loading="lazy"><figcaption>3. Detail and connector</figcaption></figure>
+    <figure role="listitem"><img src="../../assets/img/ev/configurar-carga.webp" alt="Charge setup: vehicle, limit and payment method" width="375" height="832" loading="lazy"><figcaption>4. Charge setup</figcaption></figure>
+    <figure role="listitem"><img src="../../assets/img/ev/carga-en-vivo.webp" alt="Live charging at 44% with energy, time and estimated cost" width="375" height="812" loading="lazy"><figcaption>5. Live charging</figcaption></figure>
+    <figure role="listitem"><img src="../../assets/img/ev/live-activity.webp" alt="Lock-screen Live Activity with progress and limit" width="375" height="812" loading="lazy"><figcaption>6. Live Activity</figcaption></figure>
+    <figure role="listitem"><img src="../../assets/img/ev/comprobante.webp" alt="EV charging receipt with energy and cost breakdown" width="375" height="818" loading="lazy"><figcaption>7. Receipt</figcaption></figure>
+  </div>
+
+  <div class="container cs-body">
+    <section class="cs-block">
+      <h2>The challenge</h2>
+      <div class="cs-block__content">
+        <p>Charging an EV in Colombia still raises doubts: does the station work? Is the connector compatible? How much will I pay? What happens if I leave while it's charging? Every doubt is a drop-off.</p>
+        <ul>
+          <li><strong>Variable pricing:</strong> you pay for energy (kWh), plus post-charge parking and a service fee.</li>
+          <li><strong>Third-party hardware:</strong> the charger can be busy, fail, or not detect the cable in time.</li>
+          <li><strong>Long sessions:</strong> users don't stare at the app for 30 minutes.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>Key decisions</h2>
+      <div class="cs-block__content">
+        <h3>Transparency before charging</h3>
+        <p>Pricing is broken down on the station detail and again during setup. The message is explicit: "you're charged at the end, based on what you use; nothing is charged now". Users decide with full information.</p>
+        <h3>Users set the limit</h3>
+        <p>Users can charge to 80%, 100% or set their own limit in pesos or kWh, with range validation. They control spending without doing math.</p>
+        <h3>Tracking outside the app</h3>
+        <p>I designed iOS Live Activities to follow the charge from the lock screen, with rules for each goal type (percentage, pesos or kWh) and push notifications at every milestone: start, progress, payment and close.</p>
+        <h3>A visual system for the map</h3>
+        <figure class="figure-wide" style="max-width:340px"><img src="../../assets/img/ev/pines.webp" alt="Charging-station pin matrix by status, power and whether it accepts Flypass payment" width="348" height="600" loading="lazy"><figcaption>Pins by payment method, status (open, closing soon, closed) and power (1 to 4 bolts).</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>Designing for failure</h2>
+      <div class="cs-block__content">
+        <p>A big part of the work was edge states: network error, cable not connected in time, busy charger, charger failure, no signal while charging, outstanding balance and payment retry. Each one says what happened, whether anything was charged and what to do next.</p>
+        <figure class="figure-wide" style="max-width:260px"><img src="../../assets/img/ev/error-ocupado.webp" alt="Error state: connector busy, you weren't charged, choose another point" width="375" height="885" loading="lazy"><figcaption>"You weren't charged": the phrase that reduces anxiety the most in a payment error.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="cs-block">
+      <h2>Outcomes</h2>
+      <div class="cs-block__content">
+        <div class="results">
+          <div><b>+100</b><span>screens and states documented for engineering</span></div>
+          <div><b>3</b><span>Fuel &amp; Charge program pilots (2 fuel, 1 EV charging)</span></div>
+          <div><b>100%</b><span>built with Pepino DS components</span></div>
+        </div>
+        <p>On the program's B2B side I also designed the fuel management portal for companies: available stations in list and map views, a detail drawer and a station comparator.</p>
+      </div>
+    </section>
+
+    <nav class="next" aria-label="Case navigation"><a class="btn btn--ghost" href="pepino-ai-first.html">← Pepino DS</a><a class="btn btn--primary" href="sistecredito-pagos.html">Next: Sistecrédito →</a></nav>
+  </div>
+</main>
+<footer class="footer"><div class="container"><span>© 2026 David Santiago Gil Sabogal</span><a href="mailto:davids.gilsbg@gmail.com">davids.gilsbg@gmail.com</a></div></footer>
+<script src="../../assets/js/main.js" defer></script>
+</body>
+</html>
