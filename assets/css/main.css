@@ -209,3 +209,7 @@ a { color: inherit; }
 .contact .dropdown__menu { left: 50%; transform: translateX(-50%); text-align: left; }
 .contact .dropdown { text-align: left; }
 .stat b { font-size: clamp(1.35rem, 2.1vw, 2rem); white-space: nowrap; }
+
+/* Highlight del hero detrás del texto: no tapa descendentes (g, y) */
+.hero h1 { position: relative; z-index: 0; }
+.hero h1 mark { position: relative; z-index: -1; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
